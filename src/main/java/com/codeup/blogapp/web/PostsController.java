@@ -1,0 +1,45 @@
+package com.codeup.blogapp.web;
+
+
+import com.codeup.blogapp.data.Post;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+//Annotation goes here to Annotate
+@RestController
+@RequestMapping(value = "/api/posts", headers = "Accept=application/json")
+//With the @RequestMapping annotation,
+// we are informing Spring of how to direct requests to PostsController,
+// as well as what type of data is accepted.
+public class PostsController {
+
+    @GetMapping
+    //This handy annotation is what is called a composed annotation.
+    // @GetMapping is a composed annotation that acts as a shortcut for
+    // @RequestMapping(method = RequestMethod.GET).
+    private List<Post> getPost() {
+        return new ArrayList<>() {{
+            add(new Post(1L, "A new Post",
+                    "this is a brilliant post. 10/10"));
+            add(new Post(2L, "a newer post",
+                    "this is slightly longer. 11/10"));
+            add(new Post(3L, "A new post",
+                    "this is even longer. 12/10"));
+        }};
+    }
+
+    @GetMapping("{id}")
+    private Post getPostById(@PathVariable Long id) {
+        // /api/posts/1
+        if (id == 1) {
+
+            return new Post(1L, "A new Post",
+                    "this is a brilliant post. 10/10");
+        } else {
+            return null;
+        }
+    }
+
+}
