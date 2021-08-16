@@ -67,7 +67,7 @@ function editPostEvent() {
     $('.post-edit-btn').click(function () {
 
         $(this).siblings(".post-title, .post-content").attr("contenteditable", true)
-        $(this).text("Submit")
+        $(this).text("save")
         $(this).on("click", submitEditEvent)
 
     })
