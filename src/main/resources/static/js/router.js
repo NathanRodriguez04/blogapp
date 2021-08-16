@@ -1,10 +1,11 @@
 import Home from "./views/Home.js";
-import PostIndex from "./views/PostIndex.js";
+import  {PostsEvent} from "./views/PostIndex.js";
 import About from "./views/About.js";
 import Error404 from "./views/Error404.js";
 import Loading from "./views/Loading.js";
 import Login from "./views/Login.js";
 import LoginEvent from "./auth.js";
+import PostIndex from "./views/PostIndex.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -33,6 +34,7 @@ export default function router(URI) {
             },
             uri: '/posts',
             title: 'All Posts',
+            viewEvent: PostsEvent
         },
         '/about': {
             returnView: About,
@@ -56,4 +58,3 @@ export default function router(URI) {
 
     return routes[URI];
 }
-
