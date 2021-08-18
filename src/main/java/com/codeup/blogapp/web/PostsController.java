@@ -2,6 +2,7 @@ package com.codeup.blogapp.web;
 
 
 import com.codeup.blogapp.data.Post;
+import com.codeup.blogapp.data.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,13 +21,16 @@ public class PostsController {
     // @GetMapping is a composed annotation that acts as a shortcut for
     // @RequestMapping(method = RequestMethod.GET).
     private List<Post> getPost() {
+
+        User user = new User(1L,"coco","thy@email.com","pwd");
+
         return new ArrayList<>() {{
             add(new Post(1L, "A new Post",
-                    "this is a brilliant post. 10/10"));
+                    "this is a brilliant post. 10/10", user));
             add(new Post(2L, "a newer post",
-                    "this is slightly longer. 11/10"));
+                    "this is slightly longer. 11/10", user));
             add(new Post(3L, "A new post",
-                    "this is even longer. 12/10"));
+                    "this is even longer. 12/10", user));
         }};
     }
 
@@ -36,7 +40,7 @@ public class PostsController {
         if (id == 1) {
 
             return new Post(1L, "A new Post",
-                    "this is a brilliant post. 10/10");
+                    "this is a brilliant post. 10/10", new User("coco"));
         } else {
             return null;
         }
