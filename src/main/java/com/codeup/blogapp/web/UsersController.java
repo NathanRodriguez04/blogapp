@@ -12,13 +12,14 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/users")
 public class UsersController {
+    @GetMapping
     private List<User> getUser() {
         List<Post> posts = new ArrayList<>();
         posts.add(new Post("title", "content"));
 
 
         return new ArrayList<>() {{
-            add(new User(1l, "User", "new.email@gmail.com", "1234qwerty", posts));
+            add(new User(1L, "Corey", "new.email@gmail.com", "1234qwerty", posts));
 
         }};
 

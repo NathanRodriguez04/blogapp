@@ -1,11 +1,13 @@
 package com.codeup.blogapp.web;
 
 
+import com.codeup.blogapp.data.Category;
 import com.codeup.blogapp.data.Post;
 import com.codeup.blogapp.data.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 //Annotation goes here to Annotate
@@ -15,24 +17,27 @@ import java.util.List;
 // we are informing Spring of how to direct requests to PostsController,
 // as well as what type of data is accepted.
 public class PostsController {
-
+    Collection<Category> listCategory = new ArrayList<>(){{
+        add(new Category(1L,"Category"));
+    }};
     @GetMapping
     //This handy annotation is what is called a composed annotation.
     // @GetMapping is a composed annotation that acts as a shortcut for
     // @RequestMapping(method = RequestMethod.GET).
     private List<Post> getPost() {
 
-        User user = new User(1L,"coco","thy@email.com","pwd");
+        User user = new User(1L,"nate","email@email.com","1234");
 
         return new ArrayList<>() {{
             add(new Post(1L, "A new Post",
-                    "this is a brilliant post. 10/10", user));
+                    "this is a brilliant post. 10/10", user, listCategory));
             add(new Post(2L, "a newer post",
-                    "this is slightly longer. 11/10", user));
+                    "this is slightly longer. 11/10", user, listCategory));
             add(new Post(3L, "A new post",
-                    "this is even longer. 12/10", user));
+                    "this is even longer. 12/10", user, listCategory));
         }};
     }
+
 
     @GetMapping("{id}")
     private Post getPostById(@PathVariable Long id) {
@@ -40,7 +45,7 @@ public class PostsController {
         if (id == 1) {
 
             return new Post(1L, "A new Post",
-                    "this is a brilliant post. 10/10", new User("coco"));
+                    "this is a brilliant post. 10/10", new User("coco"), listCategory);
         } else {
             return null;
         }
