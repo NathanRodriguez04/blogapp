@@ -12,7 +12,6 @@ export default function render(props, route) {
     document.title = title;
     app.innerHTML = `${Navbar(null)} ${route.returnView(props)}`;
     if (route.viewEvent){
-        console.log(route)
         route.viewEvent();
 
     }

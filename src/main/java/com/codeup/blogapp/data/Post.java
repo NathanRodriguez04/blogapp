@@ -57,11 +57,11 @@ public class Post {
         this.content = content;
     }
 
-    public Collection<Category> getCategory() {
+    public Collection<Category> getCategories() {
         return categories;
     }
 
-    public void setCategory(Collection<Category> categories) {
+    public void setCategories(Collection<Category> categories) {
         this.categories = categories;
     }
 }

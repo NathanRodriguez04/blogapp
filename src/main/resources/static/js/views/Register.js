@@ -17,7 +17,7 @@ export default function Register(props) {
                         <input id="email" name="email" type="text">
                         <label for="password">Password</label>
                         <input id="password" name="password" type="password"/>
-                        <button id="register-btn" type="button" >Register</button>
+                        <button id="register-btn" type="button">Register</button>
                     </form>
                 </body>
             </html>

@@ -18,18 +18,39 @@ export default function PostIndex(props) {
                     <input type="button" id="create-post-btn" value="Add Post">
                 </form>
                 <div class="post-container">
-                    ${props.posts.map(post =>
-        `<div class="post">
-                        <h3 class="post-title">${post.title}</h3>
-                        <h2 class="post-content">${post.content}</h2>
-                        <button class="post-edit-btn" type="button" data-id="${post.id}">EDIT</button>
-                        <button class="post-delete-btn" type="button" data-id="${post.id}">DELETE</button>
-                    </div>
-                 
-                    `).join('')}
+                ${getPostsComponent(props.posts)}    
                 </div>
+            
             </main>
     `;
+
+}
+
+function getCategoriesComponent(categories) {
+    return categories.map((category) => {
+        return `
+             <span>#${category.name}</span>    
+            `
+    }).join('');
+}
+
+function getPostsComponent(posts) {
+
+    return posts.map(post =>
+        `
+        <div class="post">
+            <h3 class="post-title">${post.title}</h3>
+            <h2 class="post-content">${post.content}</h2>
+            <span class="username">Posted by: ${post.user.username}</span>
+            <div class="categories">
+                
+                ${getCategoriesComponent(post.categories)}
+            </div>
+            <button class="post-edit-btn" type="button" data-id="${post.id}">EDIT</button>
+            <button class="post-delete-btn" type="button" data-id="${post.id}">DELETE</button>
+        </div>
+
+`).join('')
 }
 
 
@@ -67,7 +88,7 @@ function editPostEvent() {
     $('.post-edit-btn').click(function () {
 
         $(this).siblings(".post-title, .post-content").attr("contenteditable", true)
-        $(this).text("save")
+        $(this).text("Submit")
         $(this).on("click", submitEditEvent)
 
     })

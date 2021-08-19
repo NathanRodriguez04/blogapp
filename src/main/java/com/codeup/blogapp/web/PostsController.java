@@ -45,7 +45,7 @@ public class PostsController {
         if (id == 1) {
 
             return new Post(1L, "A new Post",
-                    "this is a brilliant post. 10/10", new User("coco"), listCategory);
+                    "this is a brilliant post. 10/10", new User("nate"), listCategory);
         } else {
             return null;
         }
