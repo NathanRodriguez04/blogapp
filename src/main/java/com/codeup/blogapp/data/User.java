@@ -1,15 +1,33 @@
 package com.codeup.blogapp.data;
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.Date;
 //Create the fields
+@Entity
+@Table(name = "users")
 public class User {
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 120)
     private String username;
+
+    @Email
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
+
     //    private Date createdAt;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Role role = Role.USER;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "posts")
     private Collection<Post> posts;
 
     public User(long id, String username, String email, String password) {
@@ -18,6 +36,10 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+
+    }
+
+    public User() {
 
     }
 
@@ -49,7 +71,7 @@ public class User {
         this.posts = posts;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
