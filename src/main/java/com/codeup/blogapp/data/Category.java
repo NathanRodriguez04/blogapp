@@ -1,5 +1,7 @@
 package com.codeup.blogapp.data;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -13,7 +15,17 @@ public class Category {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH},
+            targetEntity = Post.class)
+    @JoinTable(
+            name="post_category",
+            joinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="post_id", nullable = false, updatable = false)},
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
+    )
     private Collection<Post> posts;
 
 
@@ -26,7 +38,7 @@ public class Category {
         this.name = name;
 
     }
-
+    //Empty Constructor
     public Category() {
 
     }
@@ -47,6 +59,11 @@ public class Category {
         this.name = name;
     }
 
+    public Collection<Post> getPosts() {
+        return posts;
+    }
 
+    public void setPosts(Collection<Post> posts) {
+        this.posts = posts;
+    }
 }
-
